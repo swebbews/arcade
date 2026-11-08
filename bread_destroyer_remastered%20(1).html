@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#8b5cf6"><title>Bread Destroyer — The Crumb Works</title>
+<style>
+:root{--paper:#f3f0ff;--ink:#241b3a;--muted:#6b6485;--line:#d9d0f2;--accent:#e0457b;--accent2:#ff9f1c;--panel:#ffffff;--green:#1fae8f;--pink:#ff4f8b;--orange:#ff9f1c;--yellow:#ffd23f;--teal:#1fb5a0;--blue:#3a86ff;--violet:#8b5cf6}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 "Trebuchet MS",system-ui,sans-serif;background-image:radial-gradient(#c9bdab55 .7px,transparent .7px);background-size:8px 8px}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:#fffaf1;color:var(--ink);border-radius:8px;padding:9px 12px;font-weight:700;transition:transform .12s,border-color .12s,background .12s}button:hover{border-color:var(--accent);background:#fff}button:active{transform:translateY(1px) scale(.98)}button:disabled{opacity:.38;cursor:not-allowed}.primary{background:var(--accent);color:white;border-color:var(--accent)}.primary:hover{background:#9f3e24;color:white}
+.wrap{max-width:1180px;margin:auto;padding:20px}.mast{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:10px 0 20px;border-bottom:2px solid var(--ink)}.brand{display:flex;align-items:center;gap:12px}.stamp{width:50px;height:50px;display:grid;place-items:center;background:var(--accent);color:#fff;border-radius:50%;font-size:28px;transform:rotate(-7deg);box-shadow:3px 3px 0 var(--ink)}.brand h1{font-family:Georgia,serif;font-size:clamp(22px,4vw,34px);letter-spacing:-1px;margin:0;line-height:1}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:10px;font-weight:900;color:var(--muted);margin-bottom:5px}.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}.head-actions{display:flex;gap:7px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}.statbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:2px 2px 0 #d7ccbb}.statbox label{display:block;text-transform:uppercase;letter-spacing:1.5px;font-size:9px;font-weight:900;color:var(--muted)}.statbox strong{font: bold clamp(19px,3vw,27px) Georgia,serif;display:block;margin:3px 0;color:var(--accent)}.statbox small{color:var(--muted);font-size:11px}
+.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:15px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:14px;box-shadow:2px 2px 0 #d7ccbb}.panelhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}.panel h2{font: bold 19px Georgia,serif;margin:0}.panel h3{font: bold 16px Georgia,serif;margin:0 0 12px}.subtle{color:var(--muted);font-size:11px}.campaign{font-size:10px;letter-spacing:1.5px;font-weight:900;color:var(--accent);text-transform:uppercase}
+.healthline{display:flex;justify-content:space-between;gap:8px;font-size:11px;font-weight:900;margin:10px 0 6px}.track{height:9px;background:#ded5c8;border-radius:99px;overflow:hidden;border:1px solid #cfc3b2}.fill{height:100%;width:100%;background:var(--accent);transition:width .15s}
+.stage{min-height:330px;position:relative;display:grid;place-items:center;overflow:hidden;border:1px dashed #c9bba7;border-radius:10px;background:linear-gradient(180deg,#f2eadc,#e6dccb);margin:10px 0}.stage:before{content:"";position:absolute;bottom:30px;left:8%;right:8%;height:18px;border-radius:50%;background:#b8a89166;filter:blur(5px)}
+.hit{position:relative;border:0;background:transparent;font-size:clamp(115px,22vw,190px);line-height:1;filter:drop-shadow(0 10px 2px #79644a30);transition:transform .08s;user-select:none;z-index:1}.hit:hover{background:transparent;border:0;filter:drop-shadow(0 10px 2px #79644a50)}.hit:active{transform:scale(.88) rotate(-5deg)}.object-caption{text-align:center;font-family:Georgia,serif;font-size:21px;font-weight:bold}.object-caption small{display:block;font:10px system-ui;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:3px}
+.floating{position:absolute;z-index:3;pointer-events:none;font-weight:900;color:var(--accent);animation:float .8s ease-out forwards;text-shadow:0 1px white}@keyframes float{to{transform:translateY(-65px);opacity:0}}
+.break-overlay{position:absolute;inset:0;z-index:4;background:#f8f4ecee;display:none;place-content:center;text-align:center;padding:20px}.break-overlay.show{display:grid}.break-overlay h2{font: bold 28px Georgia,serif;color:var(--accent);margin:0 0 7px}
+.selectors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.target-choice{padding:11px 6px;text-align:center}.target-choice .emoji{display:block;font-size:27px}.target-choice .name{display:block;font-size:12px;margin:3px}.target-choice .desc{display:block;color:var(--muted);font-size:9px}.target-choice.active{background:#f1dfcf;border:2px solid var(--accent);padding:10px 5px}
+.shop-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.catbtn{font-size:11px}.catbtn.active{background:var(--ink);color:white;border-color:var(--ink)}.shoplist{display:grid;gap:8px}.upgrade{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:9px;background:#fffaf2}.upgrade .uicon{font-size:25px;width:32px;text-align:center}.upgrade .uinfo{flex:1;min-width:0}.upgrade b{display:block;font-size:12px}.upgrade .desc{display:block;color:var(--muted);font-size:10px}.upgrade .cost{display:block;color:var(--accent);font-size:11px;font-weight:900;margin-top:3px}.upgrade .buy{font-size:10px;padding:8px}
+.tabs{display:flex;gap:5px;margin-bottom:10px}.tab{font-size:11px}.tab.active{background:var(--ink);color:white}.view{display:none}.view.active{display:block}.statsgrid,.achgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.mini{padding:9px;border:1px solid var(--line);border-radius:8px;background:#fffaf2}.mini small{display:block;color:var(--muted);font-size:10px}.mini b{font-size:14px}.achievement{padding:9px;border:1px solid var(--line);border-radius:8px;opacity:.5}.achievement.unlocked{opacity:1;background:#f1e6d3;border-color:var(--accent)}.achievement b{display:block;font-size:11px}.achievement small{font-size:10px;color:var(--muted)}
+.note{font-size:11px;color:var(--muted);line-height:1.8}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 15px;border-radius:8px;z-index:10;font-size:12px;box-shadow:0 5px 20px #0002;animation:toastin .2s}@keyframes toastin{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:10px;letter-spacing:1px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.stage{min-height:270px}}
+@media(max-width:480px){.wrap{padding:10px}.mast{align-items:flex-start}.brand h1{font-size:23px}.stamp{width:42px;height:42px}.head-actions button{font-size:10px;padding:7px}.panel{padding:11px}.stage{min-height:240px}.selectors{gap:5px}}
+
+/* ===== Colorful theme ===== */
+body{background-color:#f3f0ff;background-image:radial-gradient(circle at 8% 6%,#ffd6e8 0,transparent 32%),radial-gradient(circle at 92% 12%,#cfe4ff 0,transparent 34%),radial-gradient(circle at 50% 100%,#d3f7e8 0,transparent 40%),radial-gradient(#8b5cf633 .8px,transparent .8px);background-size:auto,auto,auto,10px 10px;background-attachment:fixed}
+.mast{border-bottom:0;position:relative}.mast:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;border-radius:9px;background:linear-gradient(90deg,var(--pink),var(--orange),var(--yellow),var(--teal),var(--blue),var(--violet))}
+.stamp{background:linear-gradient(135deg,var(--accent),var(--orange));box-shadow:3px 3px 0 var(--violet)}
+.brand h1{background:linear-gradient(90deg,var(--pink),var(--orange) 35%,var(--teal) 65%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{color:var(--violet)}
+button{background:#fff;border-color:var(--line)}button:hover{border-color:var(--violet);background:#f6f1ff}
+.primary{background:linear-gradient(135deg,var(--accent),var(--orange));border-color:transparent}.primary:hover{background:linear-gradient(135deg,var(--accent),#ff7a00);color:#fff;border-color:transparent}
+#sound{background:#e3fbf4;border-color:var(--teal)}#save{background:#e4efff;border-color:var(--blue)}#reset{background:#ffe6ef;border-color:var(--pink)}
+.adminbtn{background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;border-color:transparent}.adminbtn:hover{background:linear-gradient(135deg,#7440e8,#2f74eb);color:#fff;border-color:transparent}
+.stats .statbox{border:0;color:#fff;box-shadow:3px 3px 0 #24203a22}.stats .statbox label,.stats .statbox small{color:#ffffffe6}.stats .statbox strong{color:#fff}
+.stats .statbox:nth-child(1){background:linear-gradient(135deg,#d6246e,#ff5c9a)}.stats .statbox:nth-child(2){background:linear-gradient(135deg,#d9480f,#f08c00)}.stats .statbox:nth-child(3){background:linear-gradient(135deg,#0e8a7d,#26b5a0)}.stats .statbox:nth-child(4){background:linear-gradient(135deg,#6d28d9,#9f67ff)}
+.panel{border:1px solid var(--line);border-top:5px solid var(--violet);box-shadow:0 6px 18px #8b5cf61f}
+.layout>div>.panel:nth-child(1){border-top-color:var(--pink)}.layout>div>.panel:nth-child(2){border-top-color:var(--teal)}.layout>div>.panel:nth-child(3){border-top-color:var(--orange)}
+aside .panel:nth-child(1){border-top-color:var(--blue)}aside .panel:nth-child(2){border-top-color:var(--yellow)}aside .panel:nth-child(3){border-top-color:var(--green)}
+.panel h2,.panel h3{color:var(--ink)}.campaign{color:var(--accent)}
+.track{background:#ece6fb;border-color:#d9d0f2;height:12px}.fill{background:linear-gradient(90deg,var(--accent),var(--orange),var(--yellow))}
+.stage{border:2px dashed #b9a6f5;background:linear-gradient(180deg,#ffe9f3 0%,#e8f0ff 55%,#d9f7ec 100%)}.stage:before{background:#6d28d933}
+.break-overlay{background:#fff8fdee}
+.target-choice:nth-child(1){background:#ffe9f1}.target-choice:nth-child(2){background:#e4efff}.target-choice:nth-child(3){background:#f0e7ff}
+.target-choice.active{background:#fff2d6;border:2px solid var(--accent)}
+.catbtn:nth-child(1){background:#ffe9f1}.catbtn:nth-child(2){background:#e3fbf4}.catbtn:nth-child(3){background:#fff2d6}
+.catbtn.active,.tab.active{background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;border-color:transparent}
+.upgrade{background:#fff;border-left:5px solid var(--pink)}.upgrade:nth-child(5n+2){border-left-color:var(--orange)}.upgrade:nth-child(5n+3){border-left-color:var(--teal)}.upgrade:nth-child(5n+4){border-left-color:var(--blue)}.upgrade:nth-child(5n+5){border-left-color:var(--violet)}
+.upgrade .cost{color:#c2255c}.upgrade .buy{background:#e3fbf4;border-color:var(--teal)}.upgrade .buy:disabled{background:#fff}
+.mini{background:#f6f1ff}.mini:nth-child(4n+1){background:#ffe9f1}.mini:nth-child(4n+2){background:#e4efff}.mini:nth-child(4n+3){background:#e3fbf4}.mini:nth-child(4n+4){background:#fff2d6}
+.achievement.unlocked{background:linear-gradient(135deg,#fff4c2,#ffe0ef);border-color:var(--orange)}
+.floating:nth-child(4n+1){color:var(--pink)}.floating:nth-child(4n+2){color:var(--blue)}.floating:nth-child(4n+3){color:var(--teal)}.floating:nth-child(4n+4){color:var(--orange)}
+.toast{background:linear-gradient(135deg,var(--violet),var(--pink))}
+footer{color:var(--violet);font-weight:700}
+/* ===== Admin panel ===== */
+.admin-ov{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:14px;background:#241b3a99;backdrop-filter:blur(3px)}.admin-ov.show{display:flex}
+.admin-box{width:100%;max-width:470px;max-height:92vh;overflow:auto;background:#fff;border-radius:14px;padding:18px;border-top:6px solid var(--violet);box-shadow:0 20px 60px #241b3a66}
+.admin-box h2{font:bold 22px Georgia,serif;margin:0 0 4px}.admin-box p{margin:0 0 12px;color:var(--muted);font-size:12px}
+.admin-row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.admin-row>*{flex:1 1 auto}
+.admin-sec{margin-top:14px;padding-top:10px;border-top:1px dashed var(--line)}.admin-sec h3{font:bold 13px Georgia,serif;margin:0 0 4px;color:var(--violet)}
+.admin-box input{font:inherit;width:100%;padding:9px 10px;border:2px solid var(--line);border-radius:8px;background:#faf8ff;color:var(--ink)}.admin-box input:focus{outline:0;border-color:var(--violet)}
+.admin-err{color:#c2255c;font-size:12px;font-weight:700;min-height:16px;margin:6px 0 0}
+.adm-pink{background:#ffe9f1}.adm-blue{background:#e4efff}.adm-teal{background:#e3fbf4}.adm-gold{background:#fff2d6}.adm-red{background:#ffe0e0}
+button:focus-visible,.admin-box input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="mast"><div class="brand"><div class="stamp" id="brandicon">🍞</div><div><div class="eyebrow">The Crumb Works · Est. today</div><h1 id="title">BREAD DESTROYER</h1><p id="subtitle">A small click. A very big mess.</p></div></div><div class="head-actions"><button id="sound">♫ Sound on</button><button id="save">Save game</button><button id="reset">Reset</button><button id="admin" class="adminbtn">🔐 Admin</button></div></header>
+<section class="stats">
+<div class="statbox"><label>Crumb cash</label><strong id="cash">$0</strong><small>Lifetime earned <span id="earned">$0</span></small></div>
+<div class="statbox"><label>Tap damage</label><strong id="dmg">1</strong><small>Power per tap</small></div>
+<div class="statbox"><label>Workshop output</label><strong id="dps">0 / sec</strong><small>Passive damage</small></div>
+<div class="statbox"><label>Wreckage count</label><strong id="destroyed">0</strong><small id="lvl">Campaign level 1 / 100</small></div>
+</section>
+<div class="layout"><div>
+<section class="panel"><div class="panelhead"><div><div class="campaign" id="levelname">Bread campaign · Level 01</div><h2 id="targetname">The Daily Loaf</h2></div><span class="subtle" id="healthlabel">Still standing</span></div>
+<div class="healthline"><span id="hptext">3,000 / 3,000 HP</span><span id="percent">100%</span></div><div class="track"><div class="fill" id="bar"></div></div>
+<div class="stage" id="stage"><button class="hit" id="target" aria-label="Hit target">🍞</button><div class="break-overlay" id="complete"><h2>Well and truly wrecked.</h2><p id="comptext">Reduced to crumbs.</p><button class="primary" id="next">Next level →</button></div></div><div class="object-caption" id="caption">Fresh bread<small>tap, tap, tap — make it crumble</small></div></section>
+<section class="panel"><div class="panelhead"><div><div class="campaign">Your bench, your business</div><h2>Workshop upgrades</h2></div><span class="subtle">Buy, build, break.</span></div><div class="shop-cats" id="categories"></div><div class="shoplist" id="shop"></div></section>
+<section class="panel"><h3>Pick your demolition contract</h3><div class="selectors" id="choices"></div><p class="note">Each contract has its own 100-level ladder and health pool. Your workshop upgrades are shared across contracts.</p></section>
+</div><aside>
+<section class="panel"><h2 style="margin-bottom:12px">Workshop ledger</h2><div class="tabs"><button class="tab active" data-view="statsview">Overview</button><button class="tab" data-view="achview">Milestones</button><button class="tab" data-view="dailyview">Daily</button></div>
+<div class="view active" id="statsview"><div class="statsgrid" id="stats"></div></div><div class="view" id="achview"><div class="achgrid" id="achievements"></div></div><div class="view" id="dailyview"><div class="mini"><small>Daily biscuit bonus</small><b id="dailytext">Ready to claim</b></div><button class="primary" id="daily" style="width:100%;margin-top:8px">Claim daily cash</button><button id="bonus" style="width:100%;margin-top:8px">Try a surprise shift</button><p class="note">One daily claim per 24 hours. Surprise shifts are just for fun.</p></div></section>
+<section class="panel"><h3>How this little machine works</h3><p class="note">• Click the object to deal damage and earn cash.<br>• Hire automation to keep the workshop running while you idle.<br>• Spend cash on tap power, machinery and useful oddities.<br>• Destroy a target to advance its contract. There are 100 levels per target.<br>• Progress is saved in this browser. Use Save game before clearing browser data.</p></section>
+<section class="panel"><h3>Recent shop note</h3><p class="note" id="status">The workshop is open. Make something crumble.</p></section>
+</aside></div><footer>THE CRUMB WORKS · A TINY OFFLINE CLICKER · YOUR SAVE STAYS IN THIS BROWSER</footer></div>
+<div class="admin-ov" id="adminov" role="dialog" aria-modal="true" aria-labelledby="admintitle"><div class="admin-box">
+<div id="adminlock"><h2 id="admintitle">Admin access</h2><p>Enter the admin code to open the control panel.</p><input id="admincode" type="password" autocomplete="off" placeholder="Admin code" aria-label="Admin code"><div class="admin-err" id="adminerr"></div><div class="admin-row"><button class="primary" id="adminenter">Unlock</button><button id="adminclose1">Cancel</button></div></div>
+<div id="adminpanel" style="display:none"><h2>Admin panel</h2><p id="adminfor">Editing the active contract.</p>
+<div class="admin-sec"><h3>Crumb cash</h3><div class="admin-row"><button class="adm-teal" data-act="cash" data-n="1000">+$1K</button><button class="adm-teal" data-act="cash" data-n="100000">+$100K</button><button class="adm-teal" data-act="cash" data-n="10000000">+$10M</button></div><div class="admin-row"><input id="admincash" type="number" min="1" placeholder="Custom amount" aria-label="Custom cash amount"><button class="adm-teal" data-act="cashcustom" style="flex:0 0 auto">Add cash</button></div></div>
+<div class="admin-sec"><h3>Active target</h3><div class="admin-row"><button class="adm-red" data-act="wreck">Wreck it now</button><button class="adm-blue" data-act="heal">Restore health</button></div><div class="admin-row"><input id="adminlevel" type="number" min="1" max="100" placeholder="Level 1–100" aria-label="Contract level"><button class="adm-gold" data-act="level" style="flex:0 0 auto">Jump to level</button></div></div>
+<div class="admin-sec"><h3>Tap damage</h3><div class="admin-row"><input id="admintap" type="number" min="1" placeholder="Base tap damage" aria-label="Base tap damage"><button class="adm-pink" data-act="tap" style="flex:0 0 auto">Set base damage</button></div></div>
+<div class="admin-sec"><h3>Shortcuts</h3><div class="admin-row"><button class="adm-gold" data-act="upg">+5 levels on every upgrade</button><button class="adm-pink" data-act="ach">Unlock all milestones</button><button class="adm-blue" data-act="daily">Reset daily bonus</button></div></div>
+<div class="admin-row" style="margin-top:16px"><button class="primary" id="adminclose2">Close</button><button data-act="lock">Lock admin</button></div></div>
+</div></div>
+<script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id);
+const targets={
+ bread:{name:"Bread",title:"BREAD DESTROYER",sub:"A small click. A very big mess.",icon:"🍞",label:"The Daily Loaf",kind:"Fresh bread",hp:3000,reward:1,complete:"Reduced to crumbs."},
+ paper:{name:"Paper",title:"PAPER DESTROYER",sub:"Rip it up. Start over.",icon:"📄",label:"A Very Important Sheet",kind:"Unfortunate paperwork",hp:4000,reward:1.25,complete:"Shredded beyond filing."},
+ car:{name:"Car",title:"CAR DESTROYER",sub:"A workshop with questionable permits.",icon:"🚗",label:"The Little Runabout",kind:"Compact car",hp:5000,reward:2,complete:"A tidy pile of spare parts."}
+};
+const categories=[
+ {id:"tap",label:"Tap tools",items:[
+ {id:"gloves",name:"Padded gloves",icon:"🥊",desc:"+1 tap damage",base:20,growth:1.5,kind:"tap",amount:1},
+ {id:"mallet",name:"Bench mallet",icon:"🔨",desc:"+5 tap damage",base:120,growth:1.62,kind:"tap",amount:5},
+ {id:"press",name:"Hand press",icon:"🗜️",desc:"+25 tap damage",base:700,growth:1.72,kind:"tap",amount:25},
+ {id:"laser",name:"Precision laser",icon:"✳️",desc:"+100 tap damage",base:4500,growth:1.82,kind:"tap",amount:100},
+ {id:"wrecking",name:"Wrecking rig",icon:"🏗️",desc:"+500 tap damage",base:30000,growth:1.9,kind:"tap",amount:500}]},
+ {id:"idle",label:"Automation",items:[
+ {id:"helper",name:"Helpful apprentice",icon:"🧑‍🔧",desc:"+2 damage per second",base:75,growth:1.55,kind:"idle",amount:2},
+ {id:"robot",name:"Workshop robot",icon:"🤖",desc:"+10 damage per second",base:450,growth:1.65,kind:"idle",amount:10},
+ {id:"line",name:"Assembly line",icon:"⚙️",desc:"+50 damage per second",base:2500,growth:1.75,kind:"idle",amount:50},
+ {id:"crew",name:"Demolition crew",icon:"🚧",desc:"+250 damage per second",base:15000,growth:1.85,kind:"idle",amount:250},
+ {id:"satellite",name:"Very low orbit",icon:"🛰️",desc:"+1,250 damage per second",base:90000,growth:1.95,kind:"idle",amount:1250}]},
+ {id:"special",label:"Odd inventions",items:[
+ {id:"mult",name:"Better blueprint",icon:"📐",desc:"+20% overall damage",base:500,growth:1.8,kind:"mult",amount:.2},
+ {id:"luck",name:"Lucky charm",icon:"🍀",desc:"Adds 2% chance for a double tap",base:850,growth:1.7,kind:"luck",amount:.02},
+ {id:"crit",name:"Critical clonk",icon:"💥",desc:"Adds 1% chance for a 4× hit",base:1400,growth:1.75,kind:"crit",amount:.01},
+ {id:"combo",name:"Momentum machine",icon:"🔩",desc:"+1% overall damage",base:3500,growth:1.9,kind:"mult",amount:.01},
+ {id:"nova",name:"Crumb cyclone",icon:"🌪️",desc:"+10% overall damage",base:18000,growth:1.95,kind:"mult",amount:.1}]}
+];
+let state=defaultState(),activeCategory="tap",audioCtx=null,tickStamp=Date.now();
+function defaultState(){return {cash:0,earned:0,clicks:0,destroyed:0,selected:"bread",levels:{bread:1,paper:1,car:1},hp:{bread:3000,paper:4000,car:5000},tapBase:{bread:1,paper:1,car:1},upgrades:{},achievements:[],dailyAt:0,sound:true,version:3}}
+const allItems=()=>categories.flatMap(c=>c.items);
+const own=id=>state.upgrades[id]||0;
+const level=()=>state.levels[state.selected];
+const target=()=>targets[state.selected];
+const maxHp=(id=state.selected)=>targets[id].hp*Math.pow(1.32,state.levels[id]-1);
+const globalMult=()=>1+own("mult")*.2+own("combo")*.01+own("nova")*.1;
+const tapDamage=()=>state.tapBase[state.selected]+allItems().filter(i=>i.kind==="tap").reduce((n,i)=>n+own(i.id)*i.amount,0);
+const dps=()=>allItems().filter(i=>i.kind==="idle").reduce((n,i)=>n+own(i.id)*i.amount,0)*globalMult();
+const cashFmt=n=>{n=Math.max(0,n);if(n>=1e12)return "$"+(n/1e12).toFixed(2)+"T";if(n>=1e9)return "$"+(n/1e9).toFixed(2)+"B";if(n>=1e6)return "$"+(n/1e6).toFixed(2)+"M";if(n>=1e4)return "$"+(n/1e3).toFixed(1)+"K";return "$"+Math.floor(n).toLocaleString()};
+const fmt=n=>{if(n>=1e9)return (n/1e9).toFixed(2)+"B";if(n>=1e6)return (n/1e6).toFixed(2)+"M";if(n>=1e4)return (n/1e3).toFixed(1)+"K";return Math.floor(n).toLocaleString()};
+function toast(message){let el=document.createElement("div");el.className="toast";el.textContent=message;document.body.append(el);setTimeout(()=>el.remove(),2100);$("status").textContent=message}
+function sound(freq=360){if(!state.sound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type="sine";o.frequency.value=freq;g.gain.setValueAtTime(.025,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.09);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+.1)}catch(e){}}
+function save(show=true){try{localStorage.setItem("crumbWorksSave",JSON.stringify(state));if(show)toast("Saved on this device ✓")}catch(e){if(show)toast("Could not save — browser storage may be blocked")}}
+function load(){try{let raw=localStorage.getItem("crumbWorksSave");if(!raw)raw=localStorage.getItem("breadDestroyerSave");if(!raw)return;let old=JSON.parse(raw);state={...defaultState(),...old,levels:{...defaultState().levels,...old.levels},hp:{...defaultState().hp,...old.hp},tapBase:{...defaultState().tapBase,...old.tapBase},upgrades:old.upgrades||old.ups||{},achievements:old.achievements||old.ach||[]};state.selected=targets[state.selected]?state.selected:"bread";for(let id of Object.keys(targets)){if(!Number.isFinite(state.hp[id])||state.hp[id]<=0)state.hp[id]=maxHp(id)}}catch(e){toast("Save file was unreadable; started fresh")}}
+function drawChoices(){$("choices").innerHTML=Object.entries(targets).map(([id,t])=>`<button class="target-choice ${id===state.selected?"active":""}" data-target="${id}"><span class="emoji">${t.icon}</span><span class="name">${t.name}</span><span class="desc">${id===state.selected?"CURRENT CONTRACT":"LEVEL "+state.levels[id]+" / 100"}</span></button>`).join("")}
+function drawCategories(){$("categories").innerHTML=categories.map(c=>`<button class="catbtn ${c.id===activeCategory?"active":""}" data-category="${c.id}">${c.label}</button>`).join("")}
+function drawShop(){$("shop").innerHTML=categories.find(c=>c.id===activeCategory).items.map(i=>{let lv=own(i.id),cost=Math.floor(i.base*Math.pow(i.growth,lv));return `<div class="upgrade"><div class="uicon">${i.icon}</div><div class="uinfo"><b>${i.name} <span class="subtle">· Lv ${lv}</span></b><span class="desc">${i.desc}</span><span class="cost">${cashFmt(cost)}</span></div><button class="buy" data-buy="${i.id}" ${state.cash<cost?"disabled":""}>Buy</button></div>`}).join("")}
+const milestones=[
+ ["first","First impact","Land a tap",100,()=>state.clicks>=1],
+ ["cash","Pocket money","Earn $1,000 total",250,()=>state.earned>=1000],
+ ["ten","Getting serious","Reach level 10 in any contract",1000,()=>Object.values(state.levels).some(v=>v>=10)],
+ ["wreck","A proper mess","Destroy 100 objects",5000,()=>state.destroyed>=100],
+ ["shop","Shopaholic","Own 20 upgrade levels",3000,()=>Object.values(state.upgrades).reduce((a,b)=>a+b,0)>=20],
+ ["million","Crumb tycoon","Earn $1M total",25000,()=>state.earned>=1e6],
+ ["triple","Three contracts","All contracts reach level 5",10000,()=>Object.values(state.levels).every(v=>v>=5)],
+ ["century","Century club","Reach level 100",100000,()=>Object.values(state.levels).some(v=>v>=100)]
+];
+function checkMilestones(){let newly=[];milestones.forEach(m=>{if(!state.achievements.includes(m[0])&&m[4]()){state.achievements.push(m[0]);state.cash+=m[3];newly.push(m)}});newly.forEach(m=>toast("Milestone: "+m[1]+" · bonus "+cashFmt(m[3])))}
+function render(){let t=target(),hp=state.hp[state.selected],mx=maxHp(),pct=Math.max(0,Math.min(100,hp/mx*100));document.documentElement.style.setProperty("--accent",state.selected==="bread"?"#e0457b":state.selected==="paper"?"#2563eb":"#7c3aed");$("title").textContent=t.title;$("subtitle").textContent=t.sub;$("brandicon").textContent=t.icon;$("target").textContent=t.icon;$("targetname").textContent=t.label;$("caption").innerHTML=t.kind+"<small>tap, tap, tap — make it crumble</small>";$("levelname").textContent=t.name+" contract · Level "+String(level()).padStart(2,"0")+" / 100";$("healthlabel").textContent=hp>mx*.7?"Holding together":hp>mx*.25?"Taking a beating":"Nearly done";$("hptext").textContent=fmt(hp)+" / "+fmt(mx)+" HP";$("percent").textContent=pct.toFixed(1)+"%";$("bar").style.width=pct+"%";$("cash").textContent=cashFmt(state.cash);$("earned").textContent=cashFmt(state.earned);$("dmg").textContent=fmt(tapDamage()*globalMult());$("dps").textContent=fmt(dps())+" / sec";$("destroyed").textContent=fmt(state.destroyed);$("lvl").textContent="Campaign level "+level()+" / 100";$("complete").classList.toggle("show",hp<=0);$("comptext").textContent=t.complete;$("next").textContent=level()>=100?"Contract completed!":"Next level →";$("next").disabled=level()>=100;drawChoices();drawCategories();drawShop();$("stats").innerHTML=[["Active contract",t.name],["Campaign level",level()+" / 100"],["Total taps",fmt(state.clicks)],["Objects wrecked",fmt(state.destroyed)],["Upgrade levels",fmt(Object.values(state.upgrades).reduce((a,b)=>a+b,0))],["Milestones",state.achievements.length+" / "+milestones.length],["Lifetime cash",cashFmt(state.earned)],["Damage multiplier","×"+globalMult().toFixed(2)]].map(a=>`<div class="mini"><small>${a[0]}</small><b>${a[1]}</b></div>`).join("");$("achievements").innerHTML=milestones.map(m=>`<div class="achievement ${state.achievements.includes(m[0])?"unlocked":""}"><b>${state.achievements.includes(m[0])?"★":"◇"} ${m[1]}</b><small>${m[2]} · ${cashFmt(m[3])} reward</small></div>`).join("");let ready=Date.now()-state.dailyAt>=86400000;$("daily").disabled=!ready;$("dailytext").textContent=ready?"Ready to claim":"Claimed — come back tomorrow";$("sound").textContent=state.sound?"♫ Sound on":"♫ Sound off"}
+function spawnFloat(text){let el=document.createElement("span");el.className="floating";el.textContent=text;el.style.left=(35+Math.random()*35)+"%";el.style.top=(35+Math.random()*35)+"%";$("stage").append(el);setTimeout(()=>el.remove(),850)}
+function burst(){for(let i=0;i<12;i++){let el=document.createElement("span");el.className="floating";el.textContent=["✦","✧","•","✷"][i%4];el.style.left=Math.random()*90+"%";el.style.top=Math.random()*80+"%";$("stage").append(el);setTimeout(()=>el.remove(),950)}}
+function deal(amount,byTap=false){let id=state.selected,hp=state.hp[id];if(hp<=0)return;let actual=Math.min(hp,amount),cash=actual*targets[id].reward;state.hp[id]=Math.max(0,hp-amount);state.cash+=cash;state.earned+=cash;if(byTap){state.clicks++;spawnFloat("−"+fmt(actual)+" HP · +"+cashFmt(cash))}if(state.hp[id]<=0){state.destroyed++;toast(targets[id].name+" contract object wrecked!");burst();checkMilestones()}render()}
+function clickTarget(){let amount=tapDamage()*globalMult();if(Math.random()<Math.min(.5,own("luck")*.02))amount*=2;if(Math.random()<Math.min(.25,own("crit")*.01))amount*=4;deal(amount,true);sound(290+Math.random()*240)}
+$("target").addEventListener("click",clickTarget);
+$("next").onclick=()=>{let id=state.selected;if(state.hp[id]>0||state.levels[id]>=100)return;state.levels[id]++;state.hp[id]=maxHp(id);toast("Contract level "+state.levels[id]+" started");sound(540);render()};
+$("choices").onclick=e=>{let id=e.target.closest("[data-target]")?.dataset.target;if(!id)return;state.selected=id;render();toast(targets[id].name+" contract selected")};
+$("categories").onclick=e=>{let id=e.target.closest("[data-category]")?.dataset.category;if(id){activeCategory=id;drawCategories();drawShop()}};
+$("shop").onclick=e=>{let id=e.target.closest("[data-buy]")?.dataset.buy;if(!id)return;let item=allItems().find(i=>i.id===id),lv=own(id),cost=Math.floor(item.base*Math.pow(item.growth,lv));if(state.cash<cost)return;state.cash-=cost;state.upgrades[id]=lv+1;toast(item.name+" upgraded");sound(580);checkMilestones();render()};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".view").forEach(x=>x.classList.toggle("active",x.id===b.dataset.view))});
+$("daily").onclick=()=>{if(Date.now()-state.dailyAt<86400000)return;state.dailyAt=Date.now();let reward=1000+level()*100;state.cash+=reward;state.earned+=reward;toast("Daily biscuit bonus: "+cashFmt(reward));burst();render()};
+$("bonus").onclick=()=>{let r=Math.floor(Math.random()*3);if(r===0){state.cash+=5000;state.earned+=5000;toast("A forgotten cash tin: +$5,000")}else if(r===1){state.cash+=1000;state.earned+=1000;state.hp[state.selected]=Math.max(0,state.hp[state.selected]-Math.min(5000,maxHp()*.15));toast("A lucky gust — target took bonus damage")}else{state.cash+=2500;state.earned+=2500;toast("Unexpected overtime: +$2,500")}if(state.hp[state.selected]===0){state.destroyed++;burst();checkMilestones()}render()};
+$("sound").onclick=()=>{state.sound=!state.sound;render();sound(500)};$("save").onclick=()=>save(true);
+$("reset").onclick=()=>{if(confirm("Reset all game progress on this device? This cannot be undone.")){localStorage.removeItem("crumbWorksSave");state=defaultState();render();toast("Fresh start. Back to the bench.")}};
+const ADMIN_CODE="click";let adminUnlocked=false;const adm=$("adminov");
+function adminInfo(){$("adminfor").textContent="Editing: "+target().name+" contract · level "+level();$("adminlevel").value=level();$("admintap").value=state.tapBase[state.selected]}
+function adminShow(){adm.classList.add("show");$("adminlock").style.display=adminUnlocked?"none":"block";$("adminpanel").style.display=adminUnlocked?"block":"none";if(adminUnlocked)adminInfo();else{$("admincode").value="";$("adminerr").textContent="";setTimeout(()=>$("admincode").focus(),30)}}
+function adminHide(){adm.classList.remove("show")}
+function adminTry(){if($("admincode").value.trim().toLowerCase()===ADMIN_CODE){adminUnlocked=true;adminShow();toast("Admin unlocked")}else{$("adminerr").textContent="Wrong code. Check it and try again.";$("admincode").select()}}
+$("admin").onclick=adminShow;$("adminenter").onclick=adminTry;$("admincode").addEventListener("keydown",e=>{if(e.key==="Enter")adminTry()});
+$("adminclose1").onclick=$("adminclose2").onclick=adminHide;adm.addEventListener("click",e=>{if(e.target===adm)adminHide()});document.addEventListener("keydown",e=>{if(e.key==="Escape")adminHide()});
+$("adminpanel").onclick=e=>{let b=e.target.closest("[data-act]");if(!b||!adminUnlocked)return;let a=b.dataset.act,id=state.selected;
+if(a==="cash"){let n=Number(b.dataset.n);state.cash+=n;state.earned+=n;toast("Admin: +"+cashFmt(n))}
+else if(a==="cashcustom"){let n=Number($("admincash").value);if(!Number.isFinite(n)||n<=0){toast("Enter a cash amount above 0");return}state.cash+=n;state.earned+=n;toast("Admin: +"+cashFmt(n));$("admincash").value=""}
+else if(a==="wreck"){deal(state.hp[id]);adminInfo();return}
+else if(a==="heal"){state.hp[id]=maxHp(id);toast("Admin: target restored")}
+else if(a==="level"){let n=Math.round(Number($("adminlevel").value));if(!(n>=1&&n<=100)){toast("Level must be between 1 and 100");return}state.levels[id]=n;state.hp[id]=maxHp(id);toast("Admin: jumped to level "+n)}
+else if(a==="tap"){let n=Number($("admintap").value);if(!(n>=1)){toast("Base damage must be at least 1");return}state.tapBase[id]=n;toast("Admin: base tap damage set to "+fmt(n))}
+else if(a==="upg"){allItems().forEach(i=>{state.upgrades[i.id]=own(i.id)+5});toast("Admin: +5 levels on every upgrade")}
+else if(a==="ach"){milestones.forEach(m=>{if(!state.achievements.includes(m[0]))state.achievements.push(m[0])});toast("Admin: all milestones unlocked")}
+else if(a==="daily"){state.dailyAt=0;toast("Admin: daily bonus is ready")}
+else if(a==="lock"){adminUnlocked=false;adminHide();toast("Admin locked");return}
+save(false);render();adminInfo()};
+load();render();
+let last=Date.now();setInterval(()=>{let now=Date.now(),elapsed=Math.min(3,(now-last)/1000);last=now;let rate=dps(),hp=state.hp[state.selected];if(rate>0&&hp>0)deal(rate*elapsed,false);if(rate>0&&hp<=0){}save(false)},1000);
+setInterval(()=>save(false),15000);window.addEventListener("beforeunload",()=>save(false));
+})();
+</script></body></html>
